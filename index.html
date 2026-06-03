@@ -7,117 +7,652 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Sora:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 :root{
-  --bg:#F4F3FF;--surface:#FFFFFF;--surface2:#EDE9FF;--border:#D4CCFF;
-  --ink:#1A1533;--muted:#7A6FA8;--muted2:#5B5180;--accent:#6C3FE8;
-  --accent2:#3B82F6;--accent3:#A855F7;--accent4:#8B5CF6;
-  --accent-dim:rgba(108,63,232,0.10);--accent2-dim:rgba(59,130,246,0.10);
-  --accent3-dim:rgba(168,85,247,0.10);--glow:rgba(108,63,232,0.15);
+  --bg:#F4F3FF;
+  --surface:#FFFFFF;
+  --surface2:#EDE9FF;
+  --border:#D4CCFF;
+  --ink:#1A1533;
+  --muted:#7A6FA8;
+  --muted2:#5B5180;
+  --accent:#6C3FE8;
+  --accent2:#3B82F6;
+  --accent3:#A855F7;
+  --accent4:#8B5CF6;
+  --accent-dim:rgba(108,63,232,0.10);
+  --accent2-dim:rgba(59,130,246,0.10);
+  --accent3-dim:rgba(168,85,247,0.10);
+  --glow:rgba(108,63,232,0.15);
 }
+
 html{scroll-behavior:smooth}
-body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6;overflow-x:hidden;}
+
+body{
+  font-family:'Sora',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 700px 500px at 10% 20%, rgba(108,63,232,0.07) 0%, transparent 60%),radial-gradient(ellipse 500px 400px at 90% 70%, rgba(59,130,246,0.07) 0%, transparent 60%);pointer-events:none;z-index:0;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 3rem;background:rgba(244,243,255,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
-.nav-name{font-family:'Space Mono',monospace;font-size:0.8rem;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;font-weight:700;}
+
+/* ── BG TEXTURE ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 700px 500px at 10% 20%, rgba(108,63,232,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 400px at 90% 70%, rgba(59,130,246,0.07) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.25rem 3rem;
+  background:rgba(244,243,255,0.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-name{
+  font-family:'Space Mono',monospace;
+  font-size:0.8rem;
+  color:var(--accent);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  font-weight:700;
+}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{text-decoration:none;color:var(--muted);font-size:0.8rem;font-family:'Space Mono',monospace;letter-spacing:0.05em;transition:color 0.2s;}
+.nav-links a{
+  text-decoration:none;
+  color:var(--muted);
+  font-size:0.8rem;
+  font-family:'Space Mono',monospace;
+  letter-spacing:0.05em;
+  transition:color 0.2s;
+}
 .nav-links a:hover{color:var(--accent)}
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 380px;align-items:center;padding:7rem 3rem 4rem;gap:4rem;position:relative;overflow:hidden;z-index:1;}
-.hero::after{content:'';position:absolute;bottom:-80px;right:200px;width:320px;height:320px;background:radial-gradient(circle, rgba(108,63,232,0.12) 0%, transparent 70%);pointer-events:none;border-radius:50%;}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,5.5vw,5rem);line-height:1.05;font-weight:400;margin-bottom:0.5rem;letter-spacing:-0.02em;color:var(--ink);}
-.hero h1 span{font-style:italic;color:var(--accent);}
-.hero-role{font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:2rem;padding-left:2px;}
-.hero-desc{font-size:0.975rem;color:var(--muted2);max-width:520px;line-height:1.9;font-weight:300;margin-bottom:2.5rem;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 380px;
+  align-items:center;
+  padding:7rem 3rem 4rem;
+  gap:4rem;
+  position:relative;
+  overflow:hidden;
+  z-index:1;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  bottom:-80px;right:200px;
+  width:320px;height:320px;
+  background:radial-gradient(circle, rgba(108,63,232,0.12) 0%, transparent 70%);
+  pointer-events:none;
+  border-radius:50%;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,5.5vw,5rem);
+  line-height:1.05;
+  font-weight:400;
+  margin-bottom:0.5rem;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+}
+.hero h1 span{
+  font-style:italic;
+  color:var(--accent);
+}
+.hero-role{
+  font-family:'Space Mono',monospace;
+  font-size:0.75rem;
+  color:var(--muted);
+  letter-spacing:0.1em;
+  margin-bottom:2rem;
+  padding-left:2px;
+}
+.hero-desc{
+  font-size:0.975rem;
+  color:var(--muted2);
+  max-width:520px;
+  line-height:1.9;
+  font-weight:300;
+  margin-bottom:2.5rem;
+}
 .hero-desc strong{color:var(--ink);font-weight:500}
 .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{padding:0.65rem 1.5rem;border-radius:4px;font-family:'Space Mono',monospace;font-size:0.75rem;letter-spacing:0.06em;text-decoration:none;transition:all 0.2s;cursor:pointer;display:inline-block;}
-.btn-primary{background:var(--accent);color:#fff;border:1px solid var(--accent);box-shadow:0 4px 20px rgba(108,63,232,0.25);}
+.btn{
+  padding:0.65rem 1.5rem;
+  border-radius:4px;
+  font-family:'Space Mono',monospace;
+  font-size:0.75rem;
+  letter-spacing:0.06em;
+  text-decoration:none;
+  transition:all 0.2s;
+  cursor:pointer;
+  display:inline-block;
+}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+  border:1px solid var(--accent);
+  box-shadow:0 4px 20px rgba(108,63,232,0.25);
+}
 .btn-primary:hover{background:#5530c8;box-shadow:0 4px 28px rgba(108,63,232,0.38)}
-.btn-outline{background:transparent;color:var(--muted2);border:1px solid var(--border);}
+.btn-outline{
+  background:transparent;
+  color:var(--muted2);
+  border:1px solid var(--border);
+}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
-.hero-photo-wrap{display:flex;justify-content:center;align-items:center;z-index:1;}
-.hero-photo-frame{position:relative;width:300px;height:360px;}
-.hero-photo-frame::before{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));border-radius:6px;opacity:0.5;z-index:-1;}
-.hero-photo-frame::after{content:'';position:absolute;top:14px;left:14px;right:-14px;bottom:-14px;border:1px solid var(--border);border-radius:6px;z-index:-2;}
-.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:5px;}
-section{padding:5rem 3rem;border-top:1px solid var(--border);position:relative;z-index:1;}
-.section-header{display:flex;align-items:center;gap:1rem;margin-bottom:3rem;}
-.section-num{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--accent);letter-spacing:0.12em;font-weight:700;}
-.section-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;letter-spacing:-0.01em;color:var(--ink);}
-.section-line{flex:1;height:1px;background:var(--border);}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
-.about-text p{color:var(--muted2);font-size:0.9375rem;line-height:1.9;font-weight:300;margin-bottom:1rem;}
+
+/* HERO PHOTO */
+.hero-photo-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1;
+}
+.hero-photo-frame{
+  position:relative;
+  width:300px;height:360px;
+}
+.hero-photo-frame::before{
+  content:'';
+  position:absolute;
+  inset:-2px;
+  background:linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+  border-radius:6px;
+  opacity:0.5;
+  z-index:-1;
+}
+.hero-photo-frame::after{
+  content:'';
+  position:absolute;
+  top:14px;left:14px;
+  right:-14px;bottom:-14px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  z-index:-2;
+}
+.hero-photo-frame img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:5px;
+}
+.photo-placeholder{
+  width:100%;height:100%;
+  background:var(--surface2);
+  border-radius:5px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0.75rem;
+  border:1px dashed var(--border);
+}
+.photo-placeholder span{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;
+  color:var(--muted);
+  letter-spacing:0.1em;
+  text-align:center;
+  padding:0 1.5rem;
+}
+
+/* ── SECTION BASE ── */
+section{
+  padding:5rem 3rem;
+  border-top:1px solid var(--border);
+  position:relative;
+  z-index:1;
+}
+.section-header{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:3rem;
+}
+.section-num{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;
+  color:var(--accent);
+  letter-spacing:0.12em;
+  font-weight:700;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  font-weight:400;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+}
+.section-line{
+  flex:1;height:1px;background:var(--border);
+}
+
+/* ── ABOUT ── */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+}
+.about-text p{
+  color:var(--muted2);
+  font-size:0.9375rem;
+  line-height:1.9;
+  font-weight:300;
+  margin-bottom:1rem;
+}
 .about-text p strong{color:var(--ink);font-weight:500}
-.about-info{display:flex;flex-direction:column;gap:0.6rem;margin-top:1.5rem;}
-.about-info-row{display:flex;gap:1rem;align-items:baseline;padding:0.5rem 0;border-bottom:1px solid var(--border);}
-.info-label{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;min-width:90px;}
-.info-val{font-size:0.875rem;color:var(--ink);}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
-.tool-card{background:var(--surface);padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:0.4rem;transition:background 0.2s;}
+.about-info{
+  display:flex;flex-direction:column;gap:0.6rem;
+  margin-top:1.5rem;
+}
+.about-info-row{
+  display:flex;gap:1rem;align-items:baseline;
+  padding:0.5rem 0;
+  border-bottom:1px solid var(--border);
+}
+.info-label{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;
+  color:var(--muted);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  min-width:90px;
+}
+.info-val{
+  font-size:0.875rem;
+  color:var(--ink);
+}
+
+/* ── TOOLS ── */
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:6px;
+  overflow:hidden;
+}
+.tool-card{
+  background:var(--surface);
+  padding:1.25rem 1.5rem;
+  display:flex;flex-direction:column;gap:0.4rem;
+  transition:background 0.2s;
+}
 .tool-card:hover{background:var(--surface2)}
-.tool-category{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;}
-.tool-name{font-size:0.875rem;color:var(--ink);font-weight:500;}
-.tool-dot{width:6px;height:6px;border-radius:50%;margin-top:0.25rem;}
-.dot-green{background:#10B981}.dot-blue{background:var(--accent2)}.dot-yellow{background:#8B5CF6}.dot-red{background:var(--accent)}
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;}
-.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;}
-.cert-card:hover{border-color:var(--accent4);background:var(--surface2);box-shadow:0 4px 20px rgba(108,63,232,0.08);}
-.cert-issuer-badge{font-family:'Space Mono',monospace;font-size:0.6rem;padding:0.3rem 0.6rem;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;}
+.tool-category{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;
+  color:var(--muted);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+}
+.tool-name{
+  font-size:0.875rem;
+  color:var(--ink);
+  font-weight:500;
+}
+.tool-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  margin-top:0.25rem;
+}
+.dot-green{background:#10B981}
+.dot-blue{background:var(--accent2)}
+.dot-yellow{background:#8B5CF6}
+.dot-red{background:var(--accent)}
+
+/* ── CERTS ── */
+.certs-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1rem;
+}
+.cert-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:1.25rem 1.5rem;
+  display:flex;gap:1rem;align-items:flex-start;
+  transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;
+}
+.cert-card:hover{
+  border-color:var(--accent4);
+  background:var(--surface2);
+  box-shadow:0 4px 20px rgba(108,63,232,0.08);
+}
+.cert-issuer-badge{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;
+  padding:0.3rem 0.6rem;
+  border-radius:4px;
+  white-space:nowrap;
+  flex-shrink:0;
+  margin-top:2px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  font-weight:700;
+}
 .badge-google{background:rgba(251,191,36,0.15);color:#B45309;border:1px solid rgba(251,191,36,0.5)}
 .badge-aws{background:rgba(249,115,22,0.12);color:#C2410C;border:1px solid rgba(249,115,22,0.35)}
 .badge-komdigi{background:rgba(59,130,246,0.12);color:#1D4ED8;border:1px solid rgba(59,130,246,0.35)}
 .badge-dicoding{background:rgba(108,63,232,0.12);color:var(--accent);border:1px solid rgba(108,63,232,0.35)}
-.cert-name{font-size:0.875rem;color:var(--ink);font-weight:500;line-height:1.4;margin-bottom:0.25rem;}
-.cert-meta{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.05em;}
-.project-section{padding:5rem 3rem;border-top:1px solid var(--border);position:relative;z-index:1;}
-.project-tag{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:8px;}
-.project-tag-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.p-badge{font-family:'Space Mono',monospace;font-size:0.6rem;padding:0.2rem 0.55rem;border-radius:3px;letter-spacing:0.07em;text-transform:uppercase;font-weight:700;}
+.cert-info{}
+.cert-name{
+  font-size:0.875rem;
+  color:var(--ink);
+  font-weight:500;
+  line-height:1.4;
+  margin-bottom:0.25rem;
+}
+.cert-meta{
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;
+  color:var(--muted);
+  letter-spacing:0.05em;
+}
+
+/* ── PROJECT SECTIONS ── */
+.project-section{
+  padding:5rem 3rem;
+  border-top:1px solid var(--border);
+  position:relative;
+  z-index:1;
+}
+.project-tag{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;
+  color:var(--muted);
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:8px;
+}
+.project-tag-dot{
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.p-badge{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;
+  padding:0.2rem 0.55rem;
+  border-radius:3px;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  font-weight:700;
+}
 .p-badge-final{background:rgba(108,63,232,0.1);color:var(--accent);border:1px solid rgba(108,63,232,0.3)}
 .p-badge-training{background:rgba(59,130,246,0.1);color:#1D4ED8;border:1px solid rgba(59,130,246,0.3)}
-.project-title{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:400;letter-spacing:-0.02em;margin-bottom:0.5rem;line-height:1.1;color:var(--ink);}
-.project-subtitle{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;margin-bottom:2rem;}
-.project-body{display:grid;grid-template-columns:1.1fr 0.9fr;gap:3rem;margin-bottom:2.5rem;}
-.project-desc{color:var(--muted2);font-size:0.9375rem;line-height:1.9;font-weight:300;}
+.p-badge-academic{background:rgba(168,85,247,0.1);color:#7C3AED;border:1px solid rgba(168,85,247,0.3)}
+
+.project-title{
+  font-family:'Playfair Display',serif;
+  font-size:2.5rem;
+  font-weight:400;
+  letter-spacing:-0.02em;
+  margin-bottom:0.5rem;
+  line-height:1.1;
+  color:var(--ink);
+}
+.project-subtitle{
+  font-family:'Space Mono',monospace;
+  font-size:0.7rem;
+  color:var(--muted);
+  letter-spacing:0.08em;
+  margin-bottom:2rem;
+}
+
+.project-body{
+  display:grid;
+  grid-template-columns:1.1fr 0.9fr;
+  gap:3rem;
+  margin-bottom:2.5rem;
+}
+.project-desc{
+  color:var(--muted2);
+  font-size:0.9375rem;
+  line-height:1.9;
+  font-weight:300;
+}
 .project-desc strong{color:var(--ink);font-weight:500}
 .project-desc p{margin-bottom:1rem}
 .project-desc p:last-child{margin-bottom:0}
-.metrics-panel{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem;box-shadow:0 2px 16px rgba(108,63,232,0.06);}
-.metrics-panel-title{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
-.metric-item{display:flex;flex-direction:column;gap:0.15rem;}
-.metric-value{font-family:'Space Mono',monospace;font-size:1.25rem;font-weight:700;line-height:1;}
-.mv-green{color:#059669}.mv-blue{color:#2563EB}.mv-red{color:#7C3AED}.mv-yellow{color:var(--accent)}
-.metric-label{font-size:0.75rem;color:var(--muted2);}
+
+/* Metrics panel */
+.metrics-panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:1.5rem;
+  display:flex;flex-direction:column;gap:1rem;
+  box-shadow:0 2px 16px rgba(108,63,232,0.06);
+}
+.metrics-panel-title{
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;
+  color:var(--muted);
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  padding-bottom:0.75rem;
+  border-bottom:1px solid var(--border);
+}
+.metric-item{
+  display:flex;flex-direction:column;gap:0.15rem;
+}
+.metric-value{
+  font-family:'Space Mono',monospace;
+  font-size:1.25rem;
+  font-weight:700;
+  line-height:1;
+}
+.mv-green{color:#059669}
+.mv-blue{color:#2563EB}
+.mv-red{color:#7C3AED}
+.mv-yellow{color:var(--accent)}
+.metric-label{
+  font-size:0.75rem;
+  color:var(--muted2);
+}
 .metric-divider{height:1px;background:var(--border)}
-.project-screenshots{display:grid;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:2rem;}
+
+/* Screenshot strip */
+.project-screenshots{
+  display:grid;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:6px;
+  overflow:hidden;
+  margin-bottom:2rem;
+}
 .project-screenshots.cols-2{grid-template-columns:1fr 1fr}
-.screenshot-slot{background:var(--surface);aspect-ratio:16/9;overflow:hidden;position:relative;}
-.screenshot-slot img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
+.project-screenshots.cols-3{grid-template-columns:1fr 1fr 1fr}
+.screenshot-slot{
+  background:var(--surface);
+  aspect-ratio:16/9;
+  overflow:hidden;
+  position:relative;
+}
+.screenshot-slot img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform 0.3s;
+}
 .screenshot-slot:hover img{transform:scale(1.02)}
-.screenshot-caption{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted2);letter-spacing:0.08em;position:absolute;bottom:0.5rem;left:0.75rem;background:rgba(244,243,255,0.92);padding:0.2rem 0.4rem;border-radius:2px;}
-.project-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+.screenshot-placeholder{
+  width:100%;height:100%;
+  background:var(--surface2);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0.5rem;
+}
+.screenshot-placeholder span{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;
+  color:var(--muted);
+  letter-spacing:0.1em;
+  text-align:center;
+  padding:0 1rem;
+  line-height:1.6;
+}
+.screenshot-caption{
+  font-family:'Space Mono',monospace;
+  font-size:0.6rem;
+  color:var(--muted2);
+  letter-spacing:0.08em;
+  position:absolute;
+  bottom:0.5rem;left:0.75rem;
+  background:rgba(244,243,255,0.92);
+  padding:0.2rem 0.4rem;
+  border-radius:2px;
+}
+
+/* Stack & pipeline */
+.project-footer{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;
+}
 .stack-list{display:flex;flex-wrap:wrap;gap:0.4rem}
-.stack-tag{font-family:'Space Mono',monospace;font-size:0.62rem;padding:0.25rem 0.6rem;border:1px solid var(--border);border-radius:3px;color:var(--muted2);letter-spacing:0.05em;background:var(--surface);}
-.stack-tag.highlight{border-color:rgba(108,63,232,0.4);color:var(--accent);background:rgba(108,63,232,0.07);}
-.stack-tag.highlight2{border-color:rgba(59,130,246,0.4);color:#1D4ED8;background:rgba(59,130,246,0.07);}
-.pipeline{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:1.5rem 0;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1rem 1.25rem;overflow-x:auto;box-shadow:0 1px 8px rgba(108,63,232,0.05);}
-.pipe-step{display:flex;align-items:center;gap:0;flex-shrink:0;}
-.pipe-box{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted2);background:var(--surface2);border:1px solid var(--border);padding:0.35rem 0.7rem;border-radius:3px;letter-spacing:0.04em;white-space:nowrap;}
-.pipe-box.active{border-color:rgba(108,63,232,0.45);color:var(--accent);background:rgba(108,63,232,0.08);}
-.pipe-arrow{font-size:0.7rem;color:var(--border);padding:0 0.4rem;flex-shrink:0;}
-.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
-.contact-left h2{font-family:'Playfair Display',serif;font-size:2.75rem;font-weight:400;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem;color:var(--ink);}
-.contact-left h2 em{font-style:italic;color:var(--accent);}
-.contact-left p{color:var(--muted2);font-size:0.9rem;line-height:1.8;font-weight:300;}
-.contact-links{display:flex;flex-direction:column;gap:0.75rem;}
-.contact-link{display:flex;align-items:center;gap:1rem;text-decoration:none;color:var(--muted2);font-family:'Space Mono',monospace;font-size:0.75rem;letter-spacing:0.05em;padding:0.75rem 1rem;border:1px solid var(--border);border-radius:6px;transition:all 0.2s;background:var(--surface);}
-.contact-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(108,63,232,0.05);box-shadow:0 2px 12px rgba(108,63,232,0.1);}
-.contact-link-icon{font-size:0.7rem;color:var(--muted);}
-footer{padding:1.5rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;background:var(--surface);}
-footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.06em;}
+.stack-tag{
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;
+  padding:0.25rem 0.6rem;
+  border:1px solid var(--border);
+  border-radius:3px;
+  color:var(--muted2);
+  letter-spacing:0.05em;
+  background:var(--surface);
+}
+.stack-tag.highlight{
+  border-color:rgba(108,63,232,0.4);
+  color:var(--accent);
+  background:rgba(108,63,232,0.07);
+}
+.stack-tag.highlight2{
+  border-color:rgba(59,130,246,0.4);
+  color:#1D4ED8;
+  background:rgba(59,130,246,0.07);
+}
+
+/* Pipeline visualization */
+.pipeline{
+  display:flex;align-items:center;flex-wrap:wrap;gap:0;
+  margin:1.5rem 0;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:1rem 1.25rem;
+  overflow-x:auto;
+  box-shadow:0 1px 8px rgba(108,63,232,0.05);
+}
+.pipe-step{
+  display:flex;align-items:center;gap:0;
+  flex-shrink:0;
+}
+.pipe-box{
+  font-family:'Space Mono',monospace;
+  font-size:0.62rem;
+  color:var(--muted2);
+  background:var(--surface2);
+  border:1px solid var(--border);
+  padding:0.35rem 0.7rem;
+  border-radius:3px;
+  letter-spacing:0.04em;
+  white-space:nowrap;
+}
+.pipe-box.active{
+  border-color:rgba(108,63,232,0.45);
+  color:var(--accent);
+  background:rgba(108,63,232,0.08);
+}
+.pipe-arrow{
+  font-size:0.7rem;
+  color:var(--border);
+  padding:0 0.4rem;
+  flex-shrink:0;
+}
+
+/* ── CONTACT ── */
+.contact-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+}
+.contact-left h2{
+  font-family:'Playfair Display',serif;
+  font-size:2.75rem;
+  font-weight:400;
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  margin-bottom:1rem;
+  color:var(--ink);
+}
+.contact-left h2 em{
+  font-style:italic;
+  color:var(--accent);
+}
+.contact-left p{
+  color:var(--muted2);
+  font-size:0.9rem;
+  line-height:1.8;
+  font-weight:300;
+}
+.contact-links{
+  display:flex;flex-direction:column;gap:0.75rem;
+}
+.contact-link{
+  display:flex;align-items:center;gap:1rem;
+  text-decoration:none;
+  color:var(--muted2);
+  font-family:'Space Mono',monospace;
+  font-size:0.75rem;
+  letter-spacing:0.05em;
+  padding:0.75rem 1rem;
+  border:1px solid var(--border);
+  border-radius:6px;
+  transition:all 0.2s;
+  background:var(--surface);
+}
+.contact-link:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+  background:rgba(108,63,232,0.05);
+  box-shadow:0 2px 12px rgba(108,63,232,0.1);
+}
+.contact-link-icon{
+  font-size:0.7rem;
+  color:var(--muted);
+}
+
+/* ── FOOTER ── */
+footer{
+  padding:1.5rem 3rem;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;z-index:1;
+  background:var(--surface);
+}
+footer p{
+  font-family:'Space Mono',monospace;
+  font-size:0.65rem;
+  color:var(--muted);
+  letter-spacing:0.06em;
+}
+
+/* ── RESPONSIVE ── */
 @media(max-width:900px){
   nav{padding:1rem 1.5rem}
   .nav-links{gap:1.5rem}
@@ -127,7 +662,7 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
   section,.project-section{padding:3.5rem 1.5rem}
   .about-grid{grid-template-columns:1fr}
   .project-body{grid-template-columns:1fr}
-  .project-screenshots.cols-2{grid-template-columns:1fr}
+  .project-screenshots.cols-2,.project-screenshots.cols-3{grid-template-columns:1fr}
   .contact-inner{grid-template-columns:1fr}
   .project-footer{flex-direction:column;align-items:flex-start}
   footer{padding:1.25rem 1.5rem;flex-direction:column;gap:0.5rem;text-align:center}
@@ -152,9 +687,9 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
 <div class="hero">
   <div class="hero-left">
     <h1>Maidatuz<br>Zahraul <span>Maulida</span></h1>
-    <div class="hero-role">D4 Telecommunications Engineering · Politeknik Negeri Semarang</div>
+    <div class="hero-role">// D4 Telecommunications Engineering · Politeknik Negeri Semarang</div>
     <p class="hero-desc">
-      <strong>Data & AI enthusiast</strong> with hands on experience building end to end pipelines and machine learning systems that turn <strong>messy real world data</strong> into actionable output.
+      <strong>Data & AI enthusiast</strong> with hands-on experience in end-to-end data pipelines, machine learning, and building tools that turn <strong>messy real-world data</strong> into actionable output.
     </p>
     <div class="hero-cta">
       <a href="#sirius" class="btn btn-primary">View Projects</a>
@@ -178,10 +713,13 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
   <div class="about-grid">
     <div class="about-text">
       <p>
-        I am a <strong>D4 Telecommunications Engineering</strong> student at Politeknik Negeri Semarang, with a focus on data analytics and applied machine learning. My work centers on understanding data structure and quality before building anything on top of it, because <strong>well structured pipelines are the foundation of any reliable model.</strong>
+        I am a <strong>D4 Telecommunications Engineering</strong> student at Politeknik Negeri Semarang, focused on data and artificial intelligence. My interest lies at the intersection of raw data engineering and applied machine learning to solve real-world problems.
       </p>
       <p>
-        My final project, SIRIUS, processes real university server logs into a fully functional ML based intrusion detection system, deployed end to end on a VPS with PostgreSQL and Streamlit.
+        My approach always starts from data — understanding its structure, quality, and context before building any model. I believe that <strong>clean pipelines produce trustworthy models</strong>.
+      </p>
+      <p>
+        My final project, SIRIUS, processes real, messy university server logs — a mix of Cloudflare reverse proxy traffic and public IPs — into a fully functional ML-based intrusion detection system.
       </p>
     </div>
     <div class="about-info">
@@ -195,7 +733,7 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
       </div>
       <div class="about-info-row">
         <span class="info-label">Focus</span>
-        <span class="info-val">Data Analytics · ML · AI</span>
+        <span class="info-val">Data Engineering · ML · AI</span>
       </div>
       <div class="about-info-row">
         <span class="info-label">Location</span>
@@ -213,21 +751,96 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
     <div class="section-line"></div>
   </div>
   <div class="tools-grid">
-    <div class="tool-card"><span class="tool-category">Language</span><span class="tool-name">Python</span><div class="tool-dot dot-green"></div></div>
-    <div class="tool-card"><span class="tool-category">Data Processing</span><span class="tool-name">pandas</span><div class="tool-dot dot-green"></div></div>
-    <div class="tool-card"><span class="tool-category">Data Processing</span><span class="tool-name">NumPy</span><div class="tool-dot dot-green"></div></div>
-    <div class="tool-card"><span class="tool-category">Parsing</span><span class="tool-name">Regex</span><div class="tool-dot dot-green"></div></div>
-    <div class="tool-card"><span class="tool-category">Machine Learning</span><span class="tool-name">scikit-learn</span><div class="tool-dot dot-blue"></div></div>
-    <div class="tool-card"><span class="tool-category">ML — Anomaly</span><span class="tool-name">Isolation Forest</span><div class="tool-dot dot-blue"></div></div>
-    <div class="tool-card"><span class="tool-category">ML — Clustering</span><span class="tool-name">DBSCAN</span><div class="tool-dot dot-blue"></div></div>
-    <div class="tool-card"><span class="tool-category">Visualization</span><span class="tool-name">Matplotlib</span><div class="tool-dot dot-yellow"></div></div>
-    <div class="tool-card"><span class="tool-category">Visualization</span><span class="tool-name">Seaborn</span><div class="tool-dot dot-yellow"></div></div>
-    <div class="tool-card"><span class="tool-category">Deployment</span><span class="tool-name">Streamlit</span><div class="tool-dot dot-yellow"></div></div>
-    <div class="tool-card"><span class="tool-category">Notebook</span><span class="tool-name">Jupyter</span><div class="tool-dot dot-yellow"></div></div>
-    <div class="tool-card"><span class="tool-category">Database</span><span class="tool-name">PostgreSQL</span><div class="tool-dot dot-red"></div></div>
-    <div class="tool-card"><span class="tool-category">Version Control</span><span class="tool-name">Git</span><div class="tool-dot dot-red"></div></div>
-    <div class="tool-card"><span class="tool-category">Cloud</span><span class="tool-name">AWS DMS</span><div class="tool-dot dot-yellow"></div></div>
-    <div class="tool-card"><span class="tool-category">Infrastructure</span><span class="tool-name">Ubuntu VPS</span><div class="tool-dot dot-red"></div></div>
+    <div class="tool-card">
+      <span class="tool-category">Language</span>
+      <span class="tool-name">Python</span>
+      <div class="tool-dot dot-green"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Data Processing</span>
+      <span class="tool-name">pandas</span>
+      <div class="tool-dot dot-green"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Data Processing</span>
+      <span class="tool-name">NumPy</span>
+      <div class="tool-dot dot-green"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Parsing</span>
+      <span class="tool-name">Regex</span>
+      <div class="tool-dot dot-green"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Machine Learning</span>
+      <span class="tool-name">scikit-learn</span>
+      <div class="tool-dot dot-blue"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">ML — Anomaly</span>
+      <span class="tool-name">Isolation Forest</span>
+      <div class="tool-dot dot-blue"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">ML — Classification</span>
+      <span class="tool-name">Random Forest</span>
+      <div class="tool-dot dot-blue"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">ML — Clustering</span>
+      <span class="tool-name">DBSCAN</span>
+      <div class="tool-dot dot-blue"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">ML — Classification</span>
+      <span class="tool-name">KNN</span>
+      <div class="tool-dot dot-blue"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Visualization</span>
+      <span class="tool-name">Matplotlib</span>
+      <div class="tool-dot dot-yellow"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Visualization</span>
+      <span class="tool-name">Seaborn</span>
+      <div class="tool-dot dot-yellow"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Deployment</span>
+      <span class="tool-name">Streamlit</span>
+      <div class="tool-dot dot-yellow"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Database</span>
+      <span class="tool-name">PostgreSQL</span>
+      <div class="tool-dot dot-red"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Database</span>
+      <span class="tool-name">MySQL</span>
+      <div class="tool-dot dot-red"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Notebook</span>
+      <span class="tool-name">Jupyter</span>
+      <div class="tool-dot dot-yellow"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Version Control</span>
+      <span class="tool-name">Git</span>
+      <div class="tool-dot dot-red"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Editor</span>
+      <span class="tool-name">VS Code</span>
+      <div class="tool-dot dot-blue"></div>
+    </div>
+    <div class="tool-card">
+      <span class="tool-category">Cloud</span>
+      <span class="tool-name">AWS DMS</span>
+      <div class="tool-dot dot-yellow"></div>
+    </div>
   </div>
   <div style="display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:0.5rem"><div class="tool-dot dot-green" style="flex-shrink:0"></div><span style="font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.08em">Data Engineering</span></div>
@@ -248,14 +861,14 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
     <div class="cert-card">
       <span class="cert-issuer-badge badge-komdigi">Komdigi</span>
       <div class="cert-info">
-        <div class="cert-name">Associate Data Scientist + Python</div>
+        <div class="cert-name">Associate Data Scientist + Python — National</div>
         <div class="cert-meta">Digital Talent Scholarship 2026 · 31 hours · May 2026</div>
       </div>
     </div>
     <div class="cert-card">
       <span class="cert-issuer-badge badge-komdigi">Komdigi</span>
       <div class="cert-info">
-        <div class="cert-name">Data Scientist Supervisor</div>
+        <div class="cert-name">Data Scientist Supervisor — National</div>
         <div class="cert-meta">Digital Talent Scholarship 2026 · 20 hours · May 2026</div>
       </div>
     </div>
@@ -263,13 +876,13 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
       <span class="cert-issuer-badge badge-aws">AWS</span>
       <div class="cert-info">
         <div class="cert-name">AWS for SAP Cloud ERP Essentials</div>
-        <div class="cert-meta">AWS Training & Certification · June 2026</div>
+        <div class="cert-meta">AWS Training & Certification · May 2026</div>
       </div>
     </div>
     <div class="cert-card">
       <span class="cert-issuer-badge badge-aws">AWS</span>
       <div class="cert-info">
-        <div class="cert-name">AWS Database Migration Service (DMS)</div>
+        <div class="cert-name">AWS Database Migration Service (DMS) Getting Started</div>
         <div class="cert-meta">AWS Training & Certification · May 2026</div>
       </div>
     </div>
@@ -277,14 +890,14 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
       <span class="cert-issuer-badge badge-dicoding">Dicoding</span>
       <div class="cert-info">
         <div class="cert-name">Data Analysis with Python</div>
-        <div class="cert-meta">Google Authorized Partner · Oct 2024 · Valid until 2027</div>
+        <div class="cert-meta">Competency Certificate · October 2024 · Valid until 2027</div>
       </div>
     </div>
     <div class="cert-card">
       <span class="cert-issuer-badge badge-google">Google</span>
       <div class="cert-info">
         <div class="cert-name">Foundations: Data, Data, Everywhere</div>
-        <div class="cert-meta">Google Career Certificates via Coursera · Sep 2024 </div>
+        <div class="cert-meta">Google Career Certificates via Coursera · September 2024</div>
       </div>
     </div>
   </div>
@@ -297,38 +910,65 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
     <h2 class="section-title">Project 01</h2>
     <div class="section-line"></div>
   </div>
+
   <div class="project-tag">
     <div class="project-tag-dot" style="background:var(--accent)"></div>
-    Machine Learning · Anomaly Detection · Real World Data
+    Machine Learning · Cybersecurity · Real-World Data
     <span class="p-badge p-badge-final">Final Project</span>
   </div>
   <h2 class="project-title">SIRIUS</h2>
-  <div class="project-subtitle">ML Based Intrusion Detection System · Politeknik Negeri Semarang</div>
+  <div class="project-subtitle">// ML-Based Intrusion Detection System — Politeknik Negeri Semarang</div>
 
   <div class="pipeline">
-    <div class="pipe-step"><div class="pipe-box active">Nginx Combined Log</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Regex Parsing</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">IP Classification</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Feature Engineering</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Isolation Forest</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Random Forest</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">PostgreSQL + Dashboard</div></div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Nginx Combined Log</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Regex Parsing</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">IP Classification</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Feature Engineering</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Isolation Forest</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Random Forest</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">PostgreSQL + Dashboard</div>
+    </div>
   </div>
 
   <div class="project-body">
     <div class="project-desc">
       <p>
-        SIRIUS is an end to end intrusion detection system built on real Nginx logs from Politeknik Negeri Semarang's web server. Raw logs in Combined Log Format were parsed via regex from <strong>30,105 lines</strong>, then classified into Cloudflare, genuine public, and private IPs — with only genuine public IPs processed further for anomaly detection.
+        <strong>SIRIUS</strong> is an end-to-end intrusion detection system built on real Nginx logs from Politeknik Negeri Semarang's web server. The core challenge: raw data in Combined Log Format mixed with Cloudflare reverse proxy traffic — meaning the visible IPs are not the actual attacker IPs.
       </p>
       <p>
-        <strong>20 features</strong> were engineered to represent access patterns and request anomalies. Isolation Forest detects anomalies, then Random Forest classifies severity into High, Medium, or Low. Results are stored in PostgreSQL and served through a web dashboard deployed on Ubuntu VPS with Nginx and Streamlit.
+        The pipeline begins with <strong>parsing 30,105 log lines</strong> via regex (9 lines failed), followed by IP classification into three categories: <strong>19,731 Cloudflare</strong>, <strong>7,685 genuine public</strong>, and <strong>2,689 private</strong>. Only genuine public IPs are processed further.
+      </p>
+      <p>
+        From this data, <strong>20 features</strong> were engineered to represent access patterns, status code distributions, and request anomalies. <strong>Isolation Forest</strong> (n_estimators=200, contamination=0.03) detects anomalies, then <strong>Random Forest</strong> classifies severity into High, Medium, or Low.
+      </p>
+      <p>
+        All results are stored in <strong>PostgreSQL</strong> and visualized through a web dashboard with user management, log history, and real-time statistical analysis.
       </p>
     </div>
     <div class="metrics-panel">
-      <div class="metrics-panel-title">Model Metrics</div>
+      <div class="metrics-panel-title">// Model Metrics</div>
       <div class="metric-item">
         <div class="metric-value mv-green">93.59%</div>
-        <div class="metric-label">Random Forest Accuracy</div>
+        <div class="metric-label">Random Forest Accuracy (post-tuning)</div>
       </div>
       <div class="metric-divider"></div>
       <div class="metric-item">
@@ -337,15 +977,30 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
       </div>
       <div class="metric-divider"></div>
       <div class="metric-item">
+        <div class="metric-value mv-yellow">0.5608</div>
+        <div class="metric-label">Isolation Forest Silhouette Score</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-yellow">239.63</div>
+        <div class="metric-label">Calinski-Harabasz Score</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
         <div class="metric-value mv-red">231 / 7,685</div>
-        <div class="metric-label">Anomalies detected from public requests</div>
+        <div class="metric-label">Anomalies detected from total public requests</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-blue">0.1988</div>
+        <div class="metric-label">Separation gap (Normal vs Anomaly)</div>
       </div>
     </div>
   </div>
 
   <div class="project-screenshots cols-2" style="margin-bottom:2rem">
     <div class="screenshot-slot">
-      <img src="images/sirius-dashboard.jpeg" alt="SIRIUS Dashboard">
+      <img src="images/sirius-dashboard.png" alt="SIRIUS Dashboard">
       <span class="screenshot-caption">Security Dashboard</span>
     </div>
     <div class="screenshot-slot">
@@ -359,14 +1014,12 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
       <span class="stack-tag highlight">Python</span>
       <span class="stack-tag highlight">pandas</span>
       <span class="stack-tag highlight">regex</span>
-      <span class="stack-tag">scikit learn</span>
+      <span class="stack-tag">scikit-learn</span>
       <span class="stack-tag">Isolation Forest</span>
       <span class="stack-tag">Random Forest</span>
       <span class="stack-tag highlight">PostgreSQL</span>
       <span class="stack-tag">feature engineering</span>
       <span class="stack-tag">IP classification</span>
-      <span class="stack-tag">Ubuntu VPS</span>
-      <span class="stack-tag highlight2">Streamlit</span>
     </div>
   </div>
 </div>
@@ -378,48 +1031,82 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
     <h2 class="section-title">Project 02</h2>
     <div class="section-line"></div>
   </div>
+
   <div class="project-tag">
     <div class="project-tag-dot" style="background:var(--accent2)"></div>
-    Data Analysis · EDA · Dashboard
+    Data Analysis · Visualization · Dashboard
     <span class="p-badge p-badge-training">Dicoding Certification Project</span>
   </div>
   <h2 class="project-title">Bike Sharing<br>Dashboard</h2>
-  <div class="project-subtitle">Data Analysis with Python · Dicoding · 2024</div>
+  <div class="project-subtitle">// Data Analysis with Python — Dicoding · 2024</div>
 
   <div class="pipeline">
-    <div class="pipe-step"><div class="pipe-box active">UCI Dataset</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Gathering</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Assessing</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Cleaning</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">EDA</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Visualization</div><div class="pipe-arrow">→</div></div>
-    <div class="pipe-step"><div class="pipe-box active">Streamlit Deploy</div></div>
+    <div class="pipe-step">
+      <div class="pipe-box active">UCI Dataset</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Gathering</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Assessing</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Cleaning</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">EDA</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Visualization</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Streamlit Deploy</div>
+    </div>
   </div>
 
   <div class="project-body">
     <div class="project-desc">
       <p>
-        Exploratory data analysis on the UCI bike sharing dataset covering <strong>17,379 hourly records</strong> from 2011–2012. Data wrangling covered type conversion, missing value checks, and duplicate detection before analysis.
+        Exploratory data analysis on the bike-sharing dataset from the UCI Machine Learning Repository, covering <strong>731 daily records</strong> and <strong>17,379 hourly records</strong> from 2011–2012. Data wrangling included date column type conversion, missing value checks, and duplicate detection.
       </p>
       <p>
-        Three business questions were answered quantitatively: temperature's influence on rentals across workdays vs. holidays, weather condition impact on casual users, and peak hour patterns between registered and casual users. A Streamlit dashboard was built with interactive filters for time range, weather condition, and day type.
+        Three business questions were answered quantitatively: (1) <strong>temperature's influence</strong> on total rentals on workdays vs. holidays, (2) <strong>weather condition impact</strong> on casual users — clear weather yields 2.6× more rentals than misty, dropping to near zero in heavy rain, and (3) <strong>peak hour patterns</strong> between registered and casual users.
+      </p>
+      <p>
+        A Streamlit dashboard was built with interactive filters for time range, weather condition, and day type — displaying aggregated statistics and dynamic visualizations.
       </p>
     </div>
     <div class="metrics-panel">
-      <div class="metrics-panel-title">Key Findings</div>
+      <div class="metrics-panel-title">// Key Findings</div>
       <div class="metric-item">
         <div class="metric-value mv-blue">17,379</div>
         <div class="metric-label">Hourly records analyzed</div>
       </div>
       <div class="metric-divider"></div>
       <div class="metric-item">
-        <div class="metric-value mv-blue">17:00 vs 14:00</div>
-        <div class="metric-label">Peak hour: registered vs casual users</div>
+        <div class="metric-value mv-blue">17:00</div>
+        <div class="metric-label">Peak registered users — 282,640 total</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-blue">14:00</div>
+        <div class="metric-label">Peak casual users — 55,089 total</div>
       </div>
       <div class="metric-divider"></div>
       <div class="metric-item">
         <div class="metric-value mv-yellow">40.5 → 2.7</div>
-        <div class="metric-label">Avg casual rentals: Clear vs Heavy Rain</div>
+        <div class="metric-label">Avg casual rentals: Clear → Heavy Rain</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-blue">2,292,410</div>
+        <div class="metric-label">Total workday rentals (2011–2012)</div>
       </div>
     </div>
   </div>
@@ -448,17 +1135,135 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
   </div>
 </div>
 
+<!-- PROJECT 3 — SIGNAL QUALITY -->
+<div class="project-section" id="signal">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Project 03</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="project-tag">
+    <div class="project-tag-dot" style="background:var(--accent3)"></div>
+    ML · Clustering · Classification · Data Cleaning
+    <span class="p-badge p-badge-academic">Academic Project</span>
+  </div>
+  <h2 class="project-title">Cellular Signal<br>Quality Analysis</h2>
+  <div class="project-subtitle">// DBSCAN Clustering + KNN Classification · Probability & Stochastic Processes</div>
+
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="pipe-box active">Signal Measurements</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Zero-value Detection</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Mean Imputation</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Feature Scaling</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">DBSCAN</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">KNN Classifier</div>
+      <div class="pipe-arrow">→</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-box active">Network Type Prediction</div>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <div class="project-desc">
+      <p>
+        Cellular signal quality analysis using data from <strong>3 measurement devices</strong>: BB60C, srsRAN, and BladeRFxA9. The core challenge: each device produced <strong>4,208 values of 0.0</strong> — not valid zero signals, but device measurement failures. These were identified, categorized as NaN, and imputed with per-column means (BB60C: −91.77 dBm, srsRAN: −99.26 dBm, BladeRFxA9: −91.77 dBm).
+      </p>
+      <p>
+        After cleaning and StandardScaler normalization, <strong>DBSCAN</strong> was used to cluster data by signal proximity without labels. <strong>KNN</strong> was then trained to classify network types (3G, 4G, 5G, LTE) — the dataset was split 80:20 (13,463 train / 3,366 test).
+      </p>
+      <p>
+        Results show <strong>4G and 5G predicted perfectly</strong> (F1=1.00), while 3G and LTE have overlapping signal characteristics resulting in F1 ~0.73–0.74.
+      </p>
+    </div>
+    <div class="metrics-panel">
+      <div class="metrics-panel-title">// Model Metrics</div>
+      <div class="metric-item">
+        <div class="metric-value mv-red">86.75%</div>
+        <div class="metric-label">KNN Overall Accuracy</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-yellow">0.509</div>
+        <div class="metric-label">DBSCAN Silhouette Score</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-red">4G & 5G → 1.00</div>
+        <div class="metric-label">F1-Score (perfectly separable)</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-red">3G & LTE → 0.73</div>
+        <div class="metric-label">F1-Score (overlapping signal)</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-yellow">4,208</div>
+        <div class="metric-label">Zero-value anomalies cleaned per device</div>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item">
+        <div class="metric-value mv-red">13,463 / 3,366</div>
+        <div class="metric-label">Train / Test split</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-screenshots cols-2" style="margin-bottom:2rem">
+    <div class="screenshot-slot">
+      <img src="images/signal-confusion.png" alt="Confusion Matrix KNN">
+      <span class="screenshot-caption">Confusion Matrix — KNN</span>
+    </div>
+    <div class="screenshot-slot">
+      <img src="images/signal-cleaning.png" alt="Data Cleaning Output">
+      <span class="screenshot-caption">Zero-value Detection & Imputation</span>
+    </div>
+  </div>
+
+  <div class="project-footer">
+    <div class="stack-list">
+      <span class="stack-tag highlight">Python</span>
+      <span class="stack-tag highlight">pandas</span>
+      <span class="stack-tag">scikit-learn</span>
+      <span class="stack-tag">DBSCAN</span>
+      <span class="stack-tag">KNN</span>
+      <span class="stack-tag">StandardScaler</span>
+      <span class="stack-tag">Seaborn</span>
+      <span class="stack-tag">mean imputation</span>
+    </div>
+    <span style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.05em;padding:0.5rem 1rem;border:1px solid var(--border);border-radius:3px;background:var(--surface)">Private repo (academic)</span>
+  </div>
+</div>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-header">
-    <span class="section-num">06</span>
+    <span class="section-num">07</span>
     <h2 class="section-title">Contact</h2>
     <div class="section-line"></div>
   </div>
   <div class="contact-inner">
     <div class="contact-left">
       <h2>Let's work<br><em>together.</em></h2>
-      <p>Open to data & AI roles, project collaborations, or just a chat about machine learning and analytics.</p>
+      <p>Feel free to reach out for data & AI project collaborations, or just a chat about machine learning.</p>
     </div>
     <div class="contact-links">
       <a href="mailto:zahraulm52@gmail.com" class="contact-link">
@@ -475,6 +1280,7 @@ footer p{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted)
 
 <footer>
   <p>© 2026 · Maidatuz Zahraul Maulida</p>
+  <p>Built with HTML · Hosted on GitHub Pages</p>
 </footer>
 
 </body>
